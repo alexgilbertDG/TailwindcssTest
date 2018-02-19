@@ -17,8 +17,6 @@ gulp.task('purgecss', function () {
             content: ["index.html"],
             extractor: class TailwindExtractor {
                 static extract(content) {
-                    log("call")
-                    log(content.match(/[A-z0-9-:\/]+/g))
                     return content.match(/[A-z0-9-:\/]+/g) || [];
                 }
               }
