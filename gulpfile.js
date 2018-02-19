@@ -5,23 +5,23 @@ var postcss = require('gulp-postcss');
 var tailwindcss = require('tailwindcss');
 var purgecss = require('gulp-purgecss');
 
+
+
+
 gulp.task('purgecss', function () {
 
-    return gulp.src(['./main.css'])
-    
+    return gulp.src(['./main.css'])    
         .pipe(postcss([
             tailwindcss('./tailwind.js'),
-            require('autoprefixer')
         ]))
         .pipe(purgecss({
             content: ["index.html"],
-            extractor: class TailwindExtractor {
+            /*extractor: class TailwindExtractor {
                 static extract(content) {
                     return content.match(/[A-z0-9-:\/]+/g) || [];
                 }
-              }
+              } SAME EFFECT WITH AND WITHOUT */ 
         }))
-        .pipe(cleanCSS({compatibility: 'ie8'}))
         .pipe(concat('purge.min.css'))
         .pipe(gulp.dest('./build/css'));
 });
@@ -32,9 +32,7 @@ gulp.task('notpurgecss', function () {
     return gulp.src(['./main.css'])
         .pipe(postcss([
             tailwindcss('./tailwind.js'),
-            require('autoprefixer'),
         ]))
-        .pipe(cleanCSS({compatibility: 'ie8'}))
         .pipe(concat('not-purge.min.css'))
         .pipe(gulp.dest('./build/css'));
 });
