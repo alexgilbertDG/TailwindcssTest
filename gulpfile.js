@@ -16,11 +16,11 @@ gulp.task('purgecss', function () {
         ]))
         .pipe(purgecss({
             content: ["index.html"],
-            /*extractor: class TailwindExtractor {
+            extractor: class TailwindExtractor {
                 static extract(content) {
                     return content.match(/[A-z0-9-:\/]+/g) || [];
                 }
-              } SAME EFFECT WITH AND WITHOUT */ 
+              } 
         }))
         .pipe(concat('purge.min.css'))
         .pipe(gulp.dest('./build/css'));
